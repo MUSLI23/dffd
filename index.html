@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffd6e8, #e6d6ff);
+}
+
+/* Фон с сердцами и цветами */
+.background span {
+    position: absolute;
+    font-size: 24px;
+    animation: float 10s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    from {transform: translateY(100vh);}
+    to {transform: translateY(-10vh);}
+}
+
+.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    text-align: center;
+    padding-top: 60px;
+}
+
+.envelope:before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-bottom: 100px solid #ff9ecf;
+}
+
+h2 {
+    margin: 0 10px 20px 10px;
+    color: #444;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.yes {
+    background: #ff6fa5;
+    color: white;
+}
+
+.no {
+    background: #ddd;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="background" id="bg"></div>
+
+<div class="center" id="main">
+    <div class="envelope" id="envelope">
+        <h2 id="question">Will you be my Valentine? 🤍</h2>
+        <button class="yes" onclick="accept()">Да</button>
+        <button class="no" id="noBtn" onclick="decline()">Нет</button>
+    </div>
+</div>
+
+<script>
+
+/* Создание фона */
+const bg = document.getElementById("bg");
+const icons = ["❤️","🌸","💖","🌷","💐","💕"];
+for(let i=0;i<25;i++){
+    let span = document.createElement("span");
+    span.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+    span.style.left = Math.random()*100 + "vw";
+    span.style.animationDuration = (5+Math.random()*10)+"s";
+    span.style.fontSize = (20+Math.random()*20)+"px";
+    bg.appendChild(span);
+}
+
+/* Логика кнопок */
+function decline(){
+    document.getElementById("question").innerText = "Ты точно в этом уверена? 🤍";
+    document.getElementById("noBtn").style.display = "none";
+}
+
+function accept(){
+    document.getElementById("main").innerHTML = `
+    <div class="card">
+        <h2>С Днём святого Валентина 🤍</h2>
+        <p>
+        Мы знакомы всего месяц,  
+        но я правда рад, что он прошёл именно так.  
+        <br><br>
+        Спасибо тебе за общение, лёгкость  
+        и то спокойствие, которое появляется рядом с тобой.  
+        <br><br>
+        Пусть впереди будет ещё много хороших моментов.
+        </p>
+    </div>
+    `;
+}
+</script>
+
+</body>
+</html>
